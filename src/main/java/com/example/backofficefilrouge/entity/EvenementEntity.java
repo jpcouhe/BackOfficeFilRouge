@@ -30,10 +30,10 @@ public class EvenementEntity {
     @Column(name = "planning_id")
     private int planningId;
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", insertable = false, updatable = false)
     private CategoryEntity categoryByCategoryId;
     @ManyToOne
-    @JoinColumn(name = "planning_id", referencedColumnName = "planning_id", nullable = false)
+    @JoinColumn(name = "planning_id", referencedColumnName = "planning_id", insertable = false, updatable = false)
     private PlanningEntity planningByPlanningId;
 
     public int getEventId() {

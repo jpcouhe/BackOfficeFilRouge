@@ -37,7 +37,7 @@ public class UserrEntity {
     @OneToMany(mappedBy = "userrByUserId")
     private Collection<PlanningEntity> planningsByUserId;
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id", nullable = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id", insertable = false, updatable = false)
     private RoleEntity roleByRoleId;
 
     public int getUserId() {

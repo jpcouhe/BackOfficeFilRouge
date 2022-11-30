@@ -29,7 +29,7 @@ public class PlanningEntity {
     @OneToMany(mappedBy = "planningByPlanningId")
     private Collection<InteractEntity> interactsByPlanningId;
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
     private UserrEntity userrByUserId;
 
     public int getPlanningId() {

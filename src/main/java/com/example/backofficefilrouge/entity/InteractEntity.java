@@ -19,13 +19,13 @@ public class InteractEntity {
     @Column(name = "permission_id")
     private int permissionId;
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
     private UserrEntity userrByUserId;
     @ManyToOne
-    @JoinColumn(name = "planning_id", referencedColumnName = "planning_id", nullable = false)
+    @JoinColumn(name = "planning_id", referencedColumnName = "planning_id", insertable = false, updatable = false)
     private PlanningEntity planningByPlanningId;
     @ManyToOne
-    @JoinColumn(name = "permission_id", referencedColumnName = "permission_id", nullable = false)
+    @JoinColumn(name = "permission_id", referencedColumnName = "permission_id", insertable = false, updatable = false)
     private PermissionEntity permissionByPermissionId;
 
     public int getUserId() {
