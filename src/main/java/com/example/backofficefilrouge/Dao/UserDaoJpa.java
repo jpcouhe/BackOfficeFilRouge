@@ -38,8 +38,26 @@ public class UserDaoJpa implements UserDao<UserrEntity> {
 
     @Override
     public Optional<UserrEntity> findById(int id) {
-        return Optional.empty();
+        EntityManager entityManager = emf.createEntityManager();
+        EntityTransaction et = entityManager.getTransaction();
+        try{
+            et.begin();
+            //entityManager.find(UserrEntity.class, id);
+            UserrEntity user = entityManager
+                    .createQuery("SELECT u from UserrEntity u WHERE u.id = :idParam ", UserrEntity.class )
+                    .setParameter("idParam", id)
+                    .getSingleResult();
+            et.commit();
+            return Optional.of(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            if(et.isActive()) {et.rollback();}
+            return Optional.empty();
+        } finally {
+            entityManager.close();
+        }
     }
+
 
     @Override
     public boolean delete(int id) {

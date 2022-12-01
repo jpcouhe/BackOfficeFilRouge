@@ -20,6 +20,8 @@ public class UserListServlet extends HttpServlet {
         request.setAttribute("users", userList);
         request.getRequestDispatcher("/WEB-INF/user.jsp").forward(request, response);
 
+
+
     }
 
     @Override
