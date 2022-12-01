@@ -7,6 +7,9 @@
 <body>
 <h1><%= "Hello World!" %>
 </h1>
+<h2>Test</h2>
+<h3>COMMIT</h3>
+<h4>test update</h4>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
 </body>
