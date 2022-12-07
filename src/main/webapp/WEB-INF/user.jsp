@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,12 +24,15 @@
         <h1>Dashboard</h1>
         <div class="dashboard">
             <div class="dashboard-card">
-                <h2>Nombre d'utilisateurs</h2>
-                <span>12</span>
+                <form action="${pageContext.request.contextPath}/user" method="post" >
+                    <h2>Nombre d'utilisateurs</h2>
+                    <span>${fn:length(users)}</span>
+                </form>
+
             </div>
             <div class="dashboard-card">
                 <h2>Inscriptions non terminées</h2>
-                <span>10</span>
+                <span>${fn:length(usersActives)}</span>
             </div>
 
 

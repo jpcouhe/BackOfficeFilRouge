@@ -18,14 +18,16 @@
     <main class="form-signin w-100 m-auto">
         <img src="../assets/img/icons8-calendar-100.png" alt="">
         <h1 class="h3 mb-5 fw-lighter">Backoffice</h1>
-
-    <form>
+        <c:if test="${loginFail}">
+            <div class="alert alert-danger" role="alert">Bad credentials</div>
+        </c:if>
+    <form method="post" action="${pageContext.request.contextPath}/login">
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="mail">
             <label for="floatingInput">Adresse email</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
             <label for="floatingPassword">Mot de passe</label>
         </div>
 

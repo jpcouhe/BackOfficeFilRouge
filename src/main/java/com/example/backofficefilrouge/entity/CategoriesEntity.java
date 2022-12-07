@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "category", schema = "bdd_fil_rouge")
-public class CategoryEntity {
+@Table(name = "categories", schema = "bdd_fil_rouge")
+public class CategoriesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "category_id")
@@ -14,8 +14,8 @@ public class CategoryEntity {
     @Basic
     @Column(name = "category_name")
     private String categoryName;
-    @OneToMany(mappedBy = "categoryByCategoryId")
-    private Collection<EvenementEntity> evenementsByCategoryId;
+    @OneToMany(mappedBy = "categoriesByCategoryId")
+    private Collection<EventsEntity> eventsByCategoryId;
 
     public int getCategoryId() {
         return categoryId;
@@ -38,7 +38,7 @@ public class CategoryEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CategoryEntity that = (CategoryEntity) o;
+        CategoriesEntity that = (CategoriesEntity) o;
 
         if (categoryId != that.categoryId) return false;
         if (categoryName != null ? !categoryName.equals(that.categoryName) : that.categoryName != null) return false;
@@ -53,11 +53,11 @@ public class CategoryEntity {
         return result;
     }
 
-    public Collection<EvenementEntity> getEvenementsByCategoryId() {
-        return evenementsByCategoryId;
+    public Collection<EventsEntity> getEventsByCategoryId() {
+        return eventsByCategoryId;
     }
 
-    public void setEvenementsByCategoryId(Collection<EvenementEntity> evenementsByCategoryId) {
-        this.evenementsByCategoryId = evenementsByCategoryId;
+    public void setEventsByCategoryId(Collection<EventsEntity> eventsByCategoryId) {
+        this.eventsByCategoryId = eventsByCategoryId;
     }
 }

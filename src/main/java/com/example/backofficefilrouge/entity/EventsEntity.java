@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "evenement", schema = "bdd_fil_rouge")
-public class EvenementEntity {
+@Table(name = "events", schema = "bdd_fil_rouge")
+public class EventsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "event_id")
@@ -31,10 +31,10 @@ public class EvenementEntity {
     private int planningId;
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", insertable = false, updatable = false)
-    private CategoryEntity categoryByCategoryId;
+    private CategoriesEntity categoriesByCategoryId;
     @ManyToOne
     @JoinColumn(name = "planning_id", referencedColumnName = "planning_id", insertable = false, updatable = false)
-    private PlanningEntity planningByPlanningId;
+    private PlanningsEntity planningsByPlanningId;
 
     public int getEventId() {
         return eventId;
@@ -97,7 +97,7 @@ public class EvenementEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EvenementEntity that = (EvenementEntity) o;
+        EventsEntity that = (EventsEntity) o;
 
         if (eventId != that.eventId) return false;
         if (categoryId != that.categoryId) return false;
@@ -124,19 +124,19 @@ public class EvenementEntity {
         return result;
     }
 
-    public CategoryEntity getCategoryByCategoryId() {
-        return categoryByCategoryId;
+    public CategoriesEntity getCategoriesByCategoryId() {
+        return categoriesByCategoryId;
     }
 
-    public void setCategoryByCategoryId(CategoryEntity categoryByCategoryId) {
-        this.categoryByCategoryId = categoryByCategoryId;
+    public void setCategoriesByCategoryId(CategoriesEntity categoriesByCategoryId) {
+        this.categoriesByCategoryId = categoriesByCategoryId;
     }
 
-    public PlanningEntity getPlanningByPlanningId() {
-        return planningByPlanningId;
+    public PlanningsEntity getPlanningsByPlanningId() {
+        return planningsByPlanningId;
     }
 
-    public void setPlanningByPlanningId(PlanningEntity planningByPlanningId) {
-        this.planningByPlanningId = planningByPlanningId;
+    public void setPlanningsByPlanningId(PlanningsEntity planningsByPlanningId) {
+        this.planningsByPlanningId = planningsByPlanningId;
     }
 }

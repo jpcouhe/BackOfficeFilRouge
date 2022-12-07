@@ -10,14 +10,14 @@
            <li class="list"><a class="d-flex align-items-center" href="#"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
         </ul>
         <div class="logout w-100">
-                <form class="logout-form text-center" action="#" method="post">
+                <form class="logout-form text-center" action="${pageContext.request.contextPath}/logout" method="post">
                         <button class="text-uppercase border-0">Signout</button>
                 </form>
         </div>
     </nav>
-    <button class="nav-toggler d-block border-0 d-sm-none " aria-label="ouvrir et fermer le menu">
+
+    <button class="nav-toggler d-block border-0 d-sm-none " aria-label="ouvrir et fermer le menu" type="submit">
         <img class="w-100" src="${pageContext.request.contextPath}/assets/img/hamburger.svg" alt="icone de menu">
     </button>
-
 </header>
 

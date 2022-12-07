@@ -1,20 +1,19 @@
 package com.example.backofficefilrouge.Dao;
 
-import com.example.backofficefilrouge.entity.UserrEntity;
+import com.example.backofficefilrouge.entity.UsersEntity;
 import jakarta.persistence.*;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDaoJpa implements UserDao<UserrEntity> {
+public class UserDaoJpa implements UserDao<UsersEntity> {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 
     @Override
-    public List<UserrEntity> findAll() {
-        List<UserrEntity> userList = new ArrayList<>();
+    public List<UsersEntity> findAll() {
+        List<UsersEntity> userList = new ArrayList<>();
 
         EntityManager entityManager = emf.createEntityManager();
         EntityTransaction et = entityManager.getTransaction();
@@ -22,7 +21,7 @@ public class UserDaoJpa implements UserDao<UserrEntity> {
         try{
             et.begin();
 
-            TypedQuery<UserrEntity> query = entityManager.createQuery("SELECT u from UserrEntity u", UserrEntity.class);
+            TypedQuery<UsersEntity> query = entityManager.createQuery("SELECT u from UsersEntity u", UsersEntity.class);
             userList = query.getResultList();
             et.commit();
 
@@ -37,27 +36,85 @@ public class UserDaoJpa implements UserDao<UserrEntity> {
     }
 
     @Override
-    public Optional<UserrEntity> findById(int id) {
+    public Optional<UsersEntity> findById(int id) {
         return Optional.empty();
     }
 
+    public Optional<UsersEntity> findByMail(String mail) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            UsersEntity user = em.createQuery("SELECT u FROM UsersEntity u WHERE u.userEmail = :mailParam", UsersEntity.class)
+                    .setParameter("mailParam", mail)
+                    .getSingleResult();
+            et.commit();
+            return Optional.of(user);
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return Optional.empty();
+    }
+
+    public Optional<UsersEntity> findByPsw(String psw) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            UsersEntity user = em.createQuery("SELECT u FROM UsersEntity u WHERE u.userPassword = :pswParam", UsersEntity.class)
+                    .setParameter("pswParam", psw)
+                    .getSingleResult();
+            et.commit();
+            return Optional.of(user);
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return Optional.empty();
+    }
+
+//    public boolean findByIsAdmin(int role) {
+//        EntityManager em = emf.createEntityManager();
+//        EntityTransaction et = em.getTransaction();
+//        try {
+//            et.begin();
+//            UsersEntity user = em.createQuery("SELECT u FROM UsersEntity u WHERE u.roleId = 2", UsersEntity.class)
+//                    .getSingleResult();
+//            et.commit();
+//            return Optional.of(user);
+//        } catch (Exception e) {
+//            if (et.isActive()) {
+//                et.rollback();
+//            }
+//        } finally {
+//            em.close();
+//        }
+//        return Optional.empty();
+//    }
     @Override
     public boolean delete(int id) {
         return false;
     }
 
     @Override
-    public UserrEntity update(UserrEntity userrEntity) {
+    public UsersEntity update(UsersEntity userrEntity) {
         return null;
     }
 
     @Override
-    public UserrEntity signUp(UserrEntity userrEntity) {
+    public UsersEntity signUp(UsersEntity userrEntity) {
         return null;
     }
 
     @Override
-    public UserrEntity logIn(String email, String psw) {
+    public UsersEntity logIn(String email, String psw) {
         return null;
     }
 }
