@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "role", schema = "bdd_fil_rouge")
-public class RoleEntity {
+@Table(name = "roles", schema = "bdd_fil_rouge")
+public class RolesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "role_id")
@@ -14,8 +14,8 @@ public class RoleEntity {
     @Basic
     @Column(name = "role_name")
     private String roleName;
-    @OneToMany(mappedBy = "roleByRoleId")
-    private Collection<UserrEntity> userrsByRoleId;
+    @OneToMany(mappedBy = "rolesByRoleId")
+    private Collection<UsersEntity> usersByRoleId;
 
     public int getRoleId() {
         return roleId;
@@ -38,7 +38,7 @@ public class RoleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RoleEntity that = (RoleEntity) o;
+        RolesEntity that = (RolesEntity) o;
 
         if (roleId != that.roleId) return false;
         if (roleName != null ? !roleName.equals(that.roleName) : that.roleName != null) return false;
@@ -53,11 +53,11 @@ public class RoleEntity {
         return result;
     }
 
-    public Collection<UserrEntity> getUserrsByRoleId() {
-        return userrsByRoleId;
+    public Collection<UsersEntity> getUsersByRoleId() {
+        return usersByRoleId;
     }
 
-    public void setUserrsByRoleId(Collection<UserrEntity> userrsByRoleId) {
-        this.userrsByRoleId = userrsByRoleId;
+    public void setUsersByRoleId(Collection<UsersEntity> usersByRoleId) {
+        this.usersByRoleId = usersByRoleId;
     }
 }

@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "permission", schema = "bdd_fil_rouge")
-public class PermissionEntity {
+@Table(name = "permissions", schema = "bdd_fil_rouge")
+public class PermissionsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "permission_id")
@@ -14,7 +14,7 @@ public class PermissionEntity {
     @Basic
     @Column(name = "permission_name")
     private String permissionName;
-    @OneToMany(mappedBy = "permissionByPermissionId")
+    @OneToMany(mappedBy = "permissionsByPermissionId")
     private Collection<InteractEntity> interactsByPermissionId;
 
     public int getPermissionId() {
@@ -38,7 +38,7 @@ public class PermissionEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PermissionEntity that = (PermissionEntity) o;
+        PermissionsEntity that = (PermissionsEntity) o;
 
         if (permissionId != that.permissionId) return false;
         if (permissionName != null ? !permissionName.equals(that.permissionName) : that.permissionName != null)
