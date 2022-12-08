@@ -21,7 +21,7 @@ public class UserDaoJpa implements UserDao<UsersEntity> {
         try{
             et.begin();
 
-            TypedQuery<UsersEntity> query = entityManager.createQuery("SELECT u from UsersEntity u", UsersEntity.class);
+            TypedQuery<UsersEntity> query = entityManager.createQuery("SELECT u from UsersEntity u JOIN FETCH u.rolesByRoleId", UsersEntity.class);
             userList = query.getResultList();
             et.commit();
 

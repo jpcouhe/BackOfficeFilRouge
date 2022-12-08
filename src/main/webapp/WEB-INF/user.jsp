@@ -40,11 +40,12 @@
         <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm ">
             <div class="user-dashboard-header">
             <h2>Tous les utilisateurs</h2>
+
             <div class="input-group input-group-table mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
                 </div>
-                <input type="text" class="form-control" id="rechercher" placeholder="Rechercher" aria-label="rechercher" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" id="rechercher" placeholder="Rechercher" aria-label="rechercher" aria-describedby="basic-addon1" >
             </div>
 
             </div>
@@ -59,6 +60,14 @@
                 </tr>
                 </thead>
                 <tbody>
+
+<%--                <c:choose>--%>
+<%--                    <c:when test="${condition1}">--%>
+
+
+<%--                </c:choose>--%>
+
+                <c:forEach items="${users}" var="user">
                 <tr class="users-list">
                     <td class="title">
                         <a href="/user/profil?id=1">
@@ -68,11 +77,11 @@
                             <div class="user-list-details">
                                 <div class="user-list-info">
                                     <div class="user-list-title">
-                                        <h5 class="mb-0"><a href="#">Nichole Haynes</a></h5>
+                                        <h5 class="mb-0"><a href="#">${user.userFirstname} ${user.userName} </a></h5>
                                     </div>
                                     <div class="user-list-option">
                                         <ul class="list-unstyled">
-                                            <li><i class="fas fa-map-marker-alt pr-1"></i>Tours</li>
+                                            <li><i class="fas fa-map-marker-alt pr-1"> Orleans </i></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -81,17 +90,26 @@
                     </td>
                     <td class="text-center text-truncate user-mail" >
                         <a  href="/user/profil?id=1">
-                            <span class="span-td">nicholeHaynes@hotmail.fr</span>
+                            <span class="span-td">${user.userEmail}</span>
                         </a>
                      </td>
                     <td class="text-center ">
                         <a class="span-td" href="/user/profil?id=1">
-                            <span>Admin</span>
+                            <span class="user-list-time order-1"> ${user.rolesByRoleId.roleName} </span>
                         </a>
                     </td>
                     <td class="user-list-favourite-time text-center">
                         <a class="span-td" href="/user/profil?id=1">
-                            <span class="user-list-time order-1">Terminé</span>
+                            <span class="user-list-time order-1">
+                                <c:choose >
+                                    <c:when test="${user.isActive == 1}">
+                                        <c:out value="Terminé"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="Non activé"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>
                         </a>
                     </td>
                     <td>
@@ -101,6 +119,7 @@
                         </ul>
                     </td>
                 </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

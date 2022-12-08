@@ -20,7 +20,9 @@ public class UserListServlet extends HttpServlet {
         UserDao<UsersEntity> userDao = DaoFactory.getUserDao();
         List<UsersEntity> userList = userDao.findAll();
 
+
         List<UsersEntity> usersActives = userList.stream().filter(user -> user.getIsActive() == 0).collect(Collectors.toList());
+
         System.out.println(usersActives);
         request.setAttribute("users", userList);
         request.setAttribute("usersActives", usersActives);
