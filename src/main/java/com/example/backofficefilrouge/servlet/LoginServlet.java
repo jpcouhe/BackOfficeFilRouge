@@ -34,44 +34,29 @@ public class LoginServlet extends HttpServlet {
 
         UserDaoJpa userDao = new UserDaoJpa();
 
-        Optional<UsersEntity> userMail = userDao.findByMail(mail);
-        Optional<UsersEntity> userPsw = userDao.findByPsw(password);
-
+        Optional<UsersEntity> userMailAndPsw = userDao.findByMailAndPsw(mail, password);
 
         try{
-            if(userMail.isPresent() && userPsw.isPresent()){
-                if(userMail.get().getUserId() == userPsw.get().getUserId()){
-                    if (userMail.get().getRoleId() == 2 && mail.equals(userMail.get().getUserEmail()) && password.equals(userMail.get().getUserPassword())) {
-                        // Get existing session or create one if not exist
-                        HttpSession session = req.getSession(true);
-                        session.setAttribute("mail", mail);
-                        // Expiration after 30 minutes
-                        session.setMaxInactiveInterval(30 * 60);
+            if(userMailAndPsw.isPresent()){
+                if(userMailAndPsw.get().getRoleId() == 2){
+                    HttpSession session = req.getSession(true);
+                    session.setAttribute("mail", mail);
+                    // Expiration after 30 minutes
+                    session.setMaxInactiveInterval(30 * 60);
 
-                        resp.sendRedirect(UserListServlet.URL);
-                    } else {
-                        req.setAttribute("loginFail", true);
-                        doGet(req, resp);
-                    }
+                    resp.sendRedirect(UserListServlet.URL);
                 }
                 else {
                     req.setAttribute("loginFail", true);
                     doGet(req, resp);
                 }
             }
-            else if(userMail.isPresent() && userPsw.isEmpty() || userMail.isEmpty() && userPsw.isPresent()){
-                req.setAttribute("loginFail", true);
-                doGet(req, resp);
-            }
-            else{
+            else {
                 req.setAttribute("loginFail", true);
                 doGet(req, resp);
             }
         }catch (NumberFormatException e) {
             System.err.println(e.getMessage());
         }
-
-
-
     }
 }

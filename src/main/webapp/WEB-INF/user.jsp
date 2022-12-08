@@ -44,7 +44,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Rechercher" aria-label="rechercher" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" id="rechercher" placeholder="Rechercher" aria-label="rechercher" aria-describedby="basic-addon1">
             </div>
 
             </div>
