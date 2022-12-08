@@ -6,8 +6,8 @@ import java.sql.Date;
 import java.util.Collection;
 
 @Entity
-@Table(name = "planning", schema = "bdd_fil_rouge")
-public class PlanningEntity {
+@Table(name = "plannings", schema = "bdd_fil_rouge")
+public class PlanningsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "planning_id")
@@ -24,13 +24,13 @@ public class PlanningEntity {
     @Basic
     @Column(name = "user_id")
     private int userId;
-    @OneToMany(mappedBy = "planningByPlanningId")
-    private Collection<EvenementEntity> evenementsByPlanningId;
-    @OneToMany(mappedBy = "planningByPlanningId")
+    @OneToMany(mappedBy = "planningsByPlanningId")
+    private Collection<EventsEntity> eventsByPlanningId;
+    @OneToMany(mappedBy = "planningsByPlanningId")
     private Collection<InteractEntity> interactsByPlanningId;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
-    private UserrEntity userrByUserId;
+    private UsersEntity usersByUserId;
 
     public int getPlanningId() {
         return planningId;
@@ -77,7 +77,7 @@ public class PlanningEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PlanningEntity that = (PlanningEntity) o;
+        PlanningsEntity that = (PlanningsEntity) o;
 
         if (planningId != that.planningId) return false;
         if (userId != that.userId) return false;
@@ -101,12 +101,12 @@ public class PlanningEntity {
         return result;
     }
 
-    public Collection<EvenementEntity> getEvenementsByPlanningId() {
-        return evenementsByPlanningId;
+    public Collection<EventsEntity> getEventsByPlanningId() {
+        return eventsByPlanningId;
     }
 
-    public void setEvenementsByPlanningId(Collection<EvenementEntity> evenementsByPlanningId) {
-        this.evenementsByPlanningId = evenementsByPlanningId;
+    public void setEventsByPlanningId(Collection<EventsEntity> eventsByPlanningId) {
+        this.eventsByPlanningId = eventsByPlanningId;
     }
 
     public Collection<InteractEntity> getInteractsByPlanningId() {
@@ -117,11 +117,11 @@ public class PlanningEntity {
         this.interactsByPlanningId = interactsByPlanningId;
     }
 
-    public UserrEntity getUserrByUserId() {
-        return userrByUserId;
+    public UsersEntity getUsersByUserId() {
+        return usersByUserId;
     }
 
-    public void setUserrByUserId(UserrEntity userrByUserId) {
-        this.userrByUserId = userrByUserId;
+    public void setUsersByUserId(UsersEntity usersByUserId) {
+        this.usersByUserId = usersByUserId;
     }
 }

@@ -20,13 +20,13 @@ public class InteractEntity {
     private int permissionId;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
-    private UserrEntity userrByUserId;
+    private UsersEntity usersByUserId;
     @ManyToOne
     @JoinColumn(name = "planning_id", referencedColumnName = "planning_id", insertable = false, updatable = false)
-    private PlanningEntity planningByPlanningId;
+    private PlanningsEntity planningsByPlanningId;
     @ManyToOne
     @JoinColumn(name = "permission_id", referencedColumnName = "permission_id", insertable = false, updatable = false)
-    private PermissionEntity permissionByPermissionId;
+    private PermissionsEntity permissionsByPermissionId;
 
     public int getUserId() {
         return userId;
@@ -74,27 +74,27 @@ public class InteractEntity {
         return result;
     }
 
-    public UserrEntity getUserrByUserId() {
-        return userrByUserId;
+    public UsersEntity getUsersByUserId() {
+        return usersByUserId;
     }
 
-    public void setUserrByUserId(UserrEntity userrByUserId) {
-        this.userrByUserId = userrByUserId;
+    public void setUsersByUserId(UsersEntity usersByUserId) {
+        this.usersByUserId = usersByUserId;
     }
 
-    public PlanningEntity getPlanningByPlanningId() {
-        return planningByPlanningId;
+    public PlanningsEntity getPlanningsByPlanningId() {
+        return planningsByPlanningId;
     }
 
-    public void setPlanningByPlanningId(PlanningEntity planningByPlanningId) {
-        this.planningByPlanningId = planningByPlanningId;
+    public void setPlanningsByPlanningId(PlanningsEntity planningsByPlanningId) {
+        this.planningsByPlanningId = planningsByPlanningId;
     }
 
-    public PermissionEntity getPermissionByPermissionId() {
-        return permissionByPermissionId;
+    public PermissionsEntity getPermissionsByPermissionId() {
+        return permissionsByPermissionId;
     }
 
-    public void setPermissionByPermissionId(PermissionEntity permissionByPermissionId) {
-        this.permissionByPermissionId = permissionByPermissionId;
+    public void setPermissionsByPermissionId(PermissionsEntity permissionsByPermissionId) {
+        this.permissionsByPermissionId = permissionsByPermissionId;
     }
 }

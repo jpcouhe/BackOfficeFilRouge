@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "UserProfilServlet", value = "/user/profil")
+@WebServlet(name = "UserProfilServlet", value = UserProfilServlet.URL)
 public class UserProfilServlet extends HttpServlet {
+
+    public static final String URL = "/user/profil";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

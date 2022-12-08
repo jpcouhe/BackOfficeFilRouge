@@ -5,15 +5,18 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "userr", schema = "bdd_fil_rouge")
-public class UserrEntity {
+@Table(name = "users", schema = "bdd_fil_rouge")
+public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_id")
     private int userId;
     @Basic
-    @Column(name = "user_pseudo")
-    private String userPseudo;
+    @Column(name = "user_name")
+    private String userName;
+    @Basic
+    @Column(name = "user_firstname")
+    private String userFirstname;
     @Basic
     @Column(name = "user_password")
     private String userPassword;
@@ -21,24 +24,21 @@ public class UserrEntity {
     @Column(name = "user_email")
     private String userEmail;
     @Basic
-    @Column(name = "user_phone")
-    private String userPhone;
+    @Column(name = "user_picture")
+    private String userPicture;
     @Basic
-    @Column(name = "user_firstname")
-    private String userFirstname;
-    @Basic
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "isActive")
+    private Byte isActive;
     @Basic
     @Column(name = "role_id")
     private int roleId;
-    @OneToMany(mappedBy = "userrByUserId")
+    @OneToMany(mappedBy = "usersByUserId")
     private Collection<InteractEntity> interactsByUserId;
-    @OneToMany(mappedBy = "userrByUserId")
-    private Collection<PlanningEntity> planningsByUserId;
+    @OneToMany(mappedBy = "usersByUserId")
+    private Collection<PlanningsEntity> planningsByUserId;
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id", insertable = false, updatable = false)
-    private RoleEntity roleByRoleId;
+    private RolesEntity rolesByRoleId;
 
     public int getUserId() {
         return userId;
@@ -48,12 +48,20 @@ public class UserrEntity {
         this.userId = userId;
     }
 
-    public String getUserPseudo() {
-        return userPseudo;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserPseudo(String userPseudo) {
-        this.userPseudo = userPseudo;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserFirstname() {
+        return userFirstname;
+    }
+
+    public void setUserFirstname(String userFirstname) {
+        this.userFirstname = userFirstname;
     }
 
     public String getUserPassword() {
@@ -72,28 +80,20 @@ public class UserrEntity {
         this.userEmail = userEmail;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public String getUserPicture() {
+        return userPicture;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
     }
 
-    public String getUserFirstname() {
-        return userFirstname;
+    public Byte getIsActive() {
+        return isActive;
     }
 
-    public void setUserFirstname(String userFirstname) {
-        this.userFirstname = userFirstname;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setIsActive(Byte isActive) {
+        this.isActive = isActive;
     }
 
     public int getRoleId() {
@@ -109,17 +109,17 @@ public class UserrEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserrEntity that = (UserrEntity) o;
+        UsersEntity that = (UsersEntity) o;
 
         if (userId != that.userId) return false;
         if (roleId != that.roleId) return false;
-        if (userPseudo != null ? !userPseudo.equals(that.userPseudo) : that.userPseudo != null) return false;
-        if (userPassword != null ? !userPassword.equals(that.userPassword) : that.userPassword != null) return false;
-        if (userEmail != null ? !userEmail.equals(that.userEmail) : that.userEmail != null) return false;
-        if (userPhone != null ? !userPhone.equals(that.userPhone) : that.userPhone != null) return false;
+        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
         if (userFirstname != null ? !userFirstname.equals(that.userFirstname) : that.userFirstname != null)
             return false;
-        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
+        if (userPassword != null ? !userPassword.equals(that.userPassword) : that.userPassword != null) return false;
+        if (userEmail != null ? !userEmail.equals(that.userEmail) : that.userEmail != null) return false;
+        if (userPicture != null ? !userPicture.equals(that.userPicture) : that.userPicture != null) return false;
+        if (isActive != null ? !isActive.equals(that.isActive) : that.isActive != null) return false;
 
         return true;
     }
@@ -127,12 +127,12 @@ public class UserrEntity {
     @Override
     public int hashCode() {
         int result = userId;
-        result = 31 * result + (userPseudo != null ? userPseudo.hashCode() : 0);
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (userFirstname != null ? userFirstname.hashCode() : 0);
         result = 31 * result + (userPassword != null ? userPassword.hashCode() : 0);
         result = 31 * result + (userEmail != null ? userEmail.hashCode() : 0);
-        result = 31 * result + (userPhone != null ? userPhone.hashCode() : 0);
-        result = 31 * result + (userFirstname != null ? userFirstname.hashCode() : 0);
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (userPicture != null ? userPicture.hashCode() : 0);
+        result = 31 * result + (isActive != null ? isActive.hashCode() : 0);
         result = 31 * result + roleId;
         return result;
     }
@@ -145,19 +145,19 @@ public class UserrEntity {
         this.interactsByUserId = interactsByUserId;
     }
 
-    public Collection<PlanningEntity> getPlanningsByUserId() {
+    public Collection<PlanningsEntity> getPlanningsByUserId() {
         return planningsByUserId;
     }
 
-    public void setPlanningsByUserId(Collection<PlanningEntity> planningsByUserId) {
+    public void setPlanningsByUserId(Collection<PlanningsEntity> planningsByUserId) {
         this.planningsByUserId = planningsByUserId;
     }
 
-    public RoleEntity getRoleByRoleId() {
-        return roleByRoleId;
+    public RolesEntity getRolesByRoleId() {
+        return rolesByRoleId;
     }
 
-    public void setRoleByRoleId(RoleEntity roleByRoleId) {
-        this.roleByRoleId = roleByRoleId;
+    public void setRolesByRoleId(RolesEntity rolesByRoleId) {
+        this.rolesByRoleId = rolesByRoleId;
     }
 }
